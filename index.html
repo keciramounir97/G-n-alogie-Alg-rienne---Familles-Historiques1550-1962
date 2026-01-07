@@ -1,1 +1,2708 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Généalogie Algérienne - Familles Historiques 1550-1962</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #2c5530;
+        --secondary-color: #b68d40;
+        --accent-color: #8a2b2b;
+        --light-color: #f5f1e6;
+        --dark-color: #1a1a1a;
+        --transition: all 0.3s ease;
+        --site-bg-opacity: 0.26;
+        --surface-opacity: 0.78;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--dark-color);
+        background-color: #f9f9f9;
+        position: relative;
+        z-index: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url("photos/backgroundwebsite.png") center / cover no-repeat;
+        opacity: var(--site-bg-opacity);
+        filter: saturate(1.05) contrast(1.05);
+        transform: scale(1.03);
+        pointer-events: none;
+        z-index: -2;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(
+            circle at 20% 10%,
+            rgba(245, 241, 230, 0.35),
+            rgba(245, 241, 230, 0) 45%
+          ),
+          radial-gradient(
+            circle at 80% 30%,
+            rgba(182, 141, 64, 0.08),
+            rgba(182, 141, 64, 0) 55%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(249, 249, 249, 0.15),
+            rgba(249, 249, 249, 0.4)
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: #e8d8b6;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      h2 {
+        font-size: 2.4rem;
+        color: var(--accent-color);
+        border-bottom: 3px solid var(--secondary-color);
+        padding-bottom: 0.5rem;
+        margin-top: 2rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-top: 1.5rem;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Header avec image algérienne */
+      header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1589561454227-41c8c96204f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 3rem 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .logo {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: #e8d8b6;
+      }
+
+      .subtitle {
+        font-size: 1.4rem;
+        opacity: 0.9;
+        max-width: 900px;
+        margin: 0 auto 2rem;
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Navigation */
+      nav {
+        background-color: var(--primary-color);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+
+      nav li {
+        margin: 0;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        padding: 1rem 1.8rem;
+        display: block;
+        transition: var(--transition);
+        font-weight: 500;
+        font-family: "Cinzel", serif;
+      }
+
+      nav a:hover,
+      nav a.active {
+        background-color: var(--secondary-color);
+        color: var(--dark-color);
+      }
+
+      /* Main sections */
+      section {
+        padding: 4rem 0;
+        background-color: rgba(249, 249, 249, 0.6);
+        color: var(--dark-color);
+      }
+
+      section:nth-child(even) {
+        background-color: rgba(245, 241, 230, 0.55);
+      }
+
+      .family-section {
+        margin-bottom: 3rem;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(2px);
+        border-radius: 8px;
+        padding: 2.5rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        border-left: 6px solid var(--secondary-color);
+      }
+
+      .period-tag {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 0.4rem 1.2rem;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        font-family: "Cinzel", serif;
+      }
+
+      .tree-container {
+        background-color: rgba(248, 248, 248, 0.76);
+        backdrop-filter: blur(2px);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        border: 2px solid #ddd;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .tree-container pre {
+        white-space: pre-wrap;
+        margin: 0;
+      }
+
+      .tree-container .generation {
+        color: var(--accent-color);
+        font-weight: bold;
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .tree-container .person {
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .tree-container .detail {
+        color: #555;
+        margin-left: 1rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .stat-card {
+        background-color: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(2px);
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        border-top: 6px solid var(--primary-color);
+        transition: var(--transition);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        font-family: "Cinzel", serif;
+      }
+
+      /* Gallery Section */
+      .gallery-section {
+        background-color: rgba(240, 240, 240, 0.55);
+      }
+
+      .gallery-intro {
+        text-align: center;
+        margin-bottom: 2.2rem;
+      }
+
+      .gallery-subtitle {
+        max-width: 900px;
+        margin: 0.9rem auto 0;
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        opacity: 0.92;
+      }
+
+      .gallery-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1.6rem;
+      }
+
+      .gallery-search {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 999px;
+        padding: 0.6rem 1rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+
+      .gallery-search i {
+        color: var(--accent-color);
+        opacity: 0.85;
+      }
+
+      .gallery-search input {
+        border: none;
+        outline: none;
+        background: transparent;
+        min-width: 260px;
+        font-family: "Inter", sans-serif;
+      }
+
+      .gallery-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+
+      .filter-btn {
+        border: 1px solid rgba(44, 85, 48, 0.25);
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--primary-color);
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        font-family: "Cinzel", serif;
+        font-size: 0.85rem;
+      }
+
+      .filter-btn:hover {
+        transform: translateY(-1px);
+        background: rgba(182, 141, 64, 0.14);
+        border-color: rgba(182, 141, 64, 0.4);
+      }
+
+      .filter-btn.active {
+        background: var(--secondary-color);
+        color: white;
+        border-color: var(--secondary-color);
+      }
+
+      .gallery-stats {
+        margin-top: 0.9rem;
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      .gallery-count {
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.6rem;
+      }
+
+      .photo-item {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(2px);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: var(--transition);
+        height: 100%;
+      }
+
+      .photo-item:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
+        border-color: rgba(182, 141, 64, 0.45);
+      }
+
+      .photo-placeholder {
+        position: relative;
+        background: linear-gradient(
+          135deg,
+          rgba(44, 85, 48, 0.08),
+          rgba(182, 141, 64, 0.1)
+        );
+        aspect-ratio: 4 / 3;
+        min-height: 210px;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .photo-media {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1.2rem;
+        text-align: center;
+        color: #555;
+      }
+
+      .photo-placeholder.has-image[data-type="image"] .photo-media {
+        padding: 0;
+      }
+
+      .photo-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .photo-empty-icon {
+        font-size: 3rem;
+        color: rgba(44, 85, 48, 0.55);
+        margin-bottom: 0.5rem;
+      }
+
+      .photo-empty-title {
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        color: var(--primary-color);
+        font-size: 1rem;
+      }
+
+      .photo-empty-sub {
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        color: #666;
+      }
+
+      .photo-actions {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        gap: 0.5rem;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: var(--transition);
+      }
+
+      .photo-placeholder:hover .photo-actions,
+      .photo-placeholder:focus-within .photo-actions {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .photo-action {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.55);
+        color: white;
+        transition: var(--transition);
+      }
+
+      .photo-action:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .photo-action:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.72);
+        transform: scale(1.04);
+      }
+
+      .photo-badge {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        color: var(--primary-color);
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        font-family: "Cinzel", serif;
+      }
+
+      .photo-info {
+        padding: 1.05rem 1.15rem 1.2rem;
+        text-align: left;
+      }
+
+      .photo-title {
+        margin: 0 0 0.45rem;
+        font-size: 1.05rem;
+        color: var(--primary-color);
+      }
+
+      .photo-desc {
+        margin: 0 0 0.75rem;
+        color: #444;
+        font-size: 0.95rem;
+      }
+
+      .photo-meta {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        font-size: 0.82rem;
+        color: #666;
+      }
+
+      .photo-meta-item i {
+        color: var(--accent-color);
+        margin-right: 0.35rem;
+      }
+
+      .photo-item.hidden {
+        display: none;
+      }
+
+      .gallery-footer {
+        margin-top: 2.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .gallery-footer > p {
+        display: none;
+      }
+
+      .gallery-hint {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+        justify-content: center;
+        padding: 0.85rem 1.1rem;
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 14px;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      }
+
+      .hint-item {
+        font-size: 0.9rem;
+        color: #333;
+      }
+
+      .hint-item i {
+        color: var(--accent-color);
+        margin-right: 0.4rem;
+      }
+
+      .gallery-upload-all {
+        background-color: var(--primary-color) !important;
+        color: white !important;
+        border: none !important;
+        padding: 1rem 2rem !important;
+        border-radius: 999px !important;
+        margin-top: 0.2rem !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        font-family: "Cinzel", serif !important;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        transition: var(--transition);
+      }
+
+      .gallery-upload-all:hover {
+        background-color: var(--secondary-color) !important;
+        color: var(--dark-color) !important;
+        transform: translateY(-2px);
+      }
+
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(0, 0, 0, 0.72);
+        backdrop-filter: blur(6px);
+        z-index: 2000;
+      }
+
+      .lightbox.open {
+        display: flex;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 46px;
+        height: 46px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(0, 0, 0, 0.65);
+        color: white;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: var(--transition);
+      }
+
+      .lightbox-close:hover {
+        background: rgba(0, 0, 0, 0.85);
+        transform: scale(1.03);
+      }
+
+      .lightbox-content {
+        width: min(1100px, 100%);
+        max-height: 90vh;
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+      }
+
+      .lightbox-media {
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      .lightbox-media img {
+        max-width: 100%;
+        max-height: 88vh;
+        object-fit: contain;
+      }
+
+      .lightbox-side {
+        padding: 1.2rem 1.3rem;
+        overflow: auto;
+      }
+
+      .lightbox-side h3 {
+        margin-top: 0;
+      }
+
+      .lightbox-actions {
+        margin-top: 1.1rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .lightbox-download {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 999px;
+        text-decoration: none;
+        font-family: "Cinzel", serif;
+        font-weight: 700;
+        transition: var(--transition);
+      }
+
+      .lightbox-download:hover {
+        background: var(--secondary-color);
+        color: var(--dark-color);
+      }
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-logo {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--secondary-color);
+      }
+
+      .copyright {
+        margin-top: 2rem;
+        opacity: 0.8;
+        font-size: 0.9rem;
+        max-width: 600px;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        nav ul {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .photo-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+
+        .gallery-search input {
+          min-width: 200px;
+        }
+
+        .lightbox-content {
+          grid-template-columns: 1fr;
+        }
+
+        .lightbox-media img {
+          max-height: 65vh;
+        }
+
+        .tree-container {
+          font-size: 0.85rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .family-section {
+          padding: 1.5rem;
+        }
+
+        .stat-card {
+          padding: 1.5rem;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+        }
+
+        .tree-container {
+          padding: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .gallery-search {
+          width: 100%;
+        }
+
+        .gallery-search input {
+          min-width: 0;
+          width: 100%;
+        }
+      }
+
+      .section-intro {
+        text-align: center;
+        margin-bottom: 3rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .family-icon {
+        font-size: 2.2rem;
+        color: var(--secondary-color);
+        margin-right: 1rem;
+        vertical-align: middle;
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: var(--secondary-color);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-size: 1.8rem;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        z-index: 999;
+        transition: var(--transition);
+      }
+
+      .back-to-top:hover {
+        background-color: var(--primary-color);
+        transform: scale(1.1);
+      }
+
+      .highlight {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-family: "Cinzel", serif;
+      }
+
+      .timeline {
+        max-width: 900px;
+        margin: 3rem auto;
+        position: relative;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: var(--secondary-color);
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        margin: 2.5rem 0;
+        position: relative;
+        width: 50%;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        top: 2rem;
+        border: 4px solid var(--secondary-color);
+      }
+
+      .timeline-item:nth-child(odd)::before {
+        right: -12px;
+      }
+
+      .timeline-item:nth-child(even)::before {
+        left: -12px;
+      }
+
+      @media (max-width: 768px) {
+        .timeline::before {
+          left: 30px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          left: 0 !important;
+          margin-left: 60px;
+        }
+
+        .timeline-item::before {
+          left: -42px !important;
+        }
+      }
+
+      .archive-note {
+        background-color: #e8f4f8;
+        border-left: 5px solid #3498db;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+
+      .generation-title {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        margin: 2rem 0 1rem;
+        font-family: "Cinzel", serif;
+        font-size: 1.3rem;
+      }
+
+      .person-card {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        transition: var(--transition);
+      }
+
+      .person-card:hover {
+        border-color: var(--secondary-color);
+        box-shadow: 0 4px 12px rgba(182, 141, 64, 0.15);
+      }
+
+      .person-name {
+        color: var(--primary-color);
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        font-family: "Cinzel", serif;
+      }
+
+      .person-dates {
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .person-role {
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+
+      .person-details {
+        color: #666;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header avec image algérienne -->
+    <header>
+      <div class="container">
+        <div class="logo">
+          <i class="fas fa-sitemap"></i> Généalogie Algérienne
+        </div>
+        <h1>Familles Historiques d'Algérie 1550-1962</h1>
+        <p class="subtitle">
+          Arbres généalogiques complets des familles Benzaghou, Boukandoura et
+          Ouled Sidi Cheikh à travers quatre siècles d'histoire
+        </p>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="container">
+        <ul>
+          <li>
+            <a href="#introduction" class="active"
+              ><i class="fas fa-home"></i> Introduction</a
+            >
+          </li>
+          <li>
+            <a href="#benzaghou"><i class="fas fa-landmark"></i> Benzaghou</a>
+          </li>
+          <li>
+            <a href="#boukandoura"><i class="fas fa-coins"></i> Boukandoura</a>
+          </li>
+          <li>
+            <a href="#sidi-cheikh"
+              ><i class="fas fa-users"></i> Ouled Sidi Cheikh</a
+            >
+          </li>
+          <li>
+            <a href="#statistiques"
+              ><i class="fas fa-chart-bar"></i> Statistiques</a
+            >
+          </li>
+          <li>
+            <a href="#galerie"><i class="fas fa-images"></i> Galerie</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Introduction Section -->
+    <section id="introduction">
+      <div class="container">
+        <div class="section-intro">
+          <h2>
+            <i class="fas fa-scroll family-icon"></i> Introduction Historique
+          </h2>
+          <p>
+            Cette présentation retrace l'histoire généalogique de trois grandes
+            familles algériennes ayant joué un rôle significatif dans l'histoire
+            du pays du 16e au 20e siècle. À travers leurs trajectoires
+            individuelles et collectives, on découvre l'évolution politique,
+            économique et sociale de l'Algérie sur quatre siècles.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>Période Zianide/Ottomane</h3>
+            <p class="period-tag">1550-1830</p>
+            <p>
+              Fondation des dynasties familiales sous les Zianides, apogée sous
+              l'administration ottomane avec des rôles dans l'administration, le
+              commerce et la diplomatie.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h3>Transition Coloniale</h3>
+            <p class="period-tag">1830-1900</p>
+            <p>
+              Adaptation des familles au nouveau contexte colonial français,
+              avec des stratégies diverses allant de la collaboration à la
+              résistance.
+            </p>
+          </div>
+          <div class="timeline-item">
+            <h3>Modernité et Indépendance</h3>
+            <p class="period-tag">1900-1962</p>
+            <p>
+              Engagement dans les mouvements nationalistes, professionnalisation
+              et préparation à l'indépendance de l'Algérie.
+            </p>
+          </div>
+        </div>
+
+        <div class="archive-note">
+          <h4><i class="fas fa-archive"></i> Sources Archivistiques</h4>
+          <p>
+            Les informations présentées proviennent de sources historiques
+            variées : Archives Zianides, Archives Nationales d'Outre-Mer (ANOM),
+            Archives du Gouvernement Général de l'Algérie, registres cadastraux,
+            archives familiales, manuscrits de la Bibliothèque Nationale
+            d'Alger, et études historiques spécialisées.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benzaghou Family Section -->
+    <section id="benzaghou">
+      <div class="container">
+        <h2><i class="fas fa-landmark family-icon"></i> Famille Benzaghou</h2>
+        <p class="subtitle">
+          Oulémas, administration et diplomatie à Tlemcen et en Oranie
+          (1550-1962)
+        </p>
+
+        <div class="family-section">
+          <h3>Générations 1-2: Fondations Zianides (1550-1650)</h3>
+          <p class="period-tag">16e-17e siècle</p>
+
+          <div class="person-card">
+            <div class="person-name">SIDI AHMED BENZAGHOU (c. 1560-1630)</div>
+            <div class="person-dates">
+              🔴 Fondateur de la médersa Benzaghou (1585)
+            </div>
+            <div class="person-role">
+              🟠 Conseiller du sultan zianide Abou Hammou III
+            </div>
+            <div class="person-details">
+              <p>
+                <strong>Épouse :</strong> FATIMA BENT EL-MOSTAPHA (1565-1640)
+              </p>
+              <p><strong>Dot :</strong> 500 dinars or (contrat 1580)</p>
+              <p>
+                <strong>Source :</strong> Archives Zianides, Manuscrit BN Alger
+              </p>
+            </div>
+          </div>
+
+          <div class="generation-title">Descendance Directe</div>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────┐
+│        🔴 SIDI AHMED BENZAGHOU (c. 1560-1630)        │
+│  🟣 Fondateur de la médersa Benzaghou (1585)         │
+│  🟠 Conseiller du sultan zianide Abou Hammou III     │
+├─────────────────────────────────────────────────────┤
+│  🔴 Épouse : FATIMA BENT EL-MOSTAPHA (1565-1640)     │
+│  🟢 Dot : 500 dinars or (contrat 1580)               │
+│  📍 Source : Archives Zianides, Manuscrit BN Alger   │
+└─────────────────┬───────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 MOHAMED BEN SIDI AHMED   🔴 ALI BEN SIDI AHMED
+(1595-1665)                 (1600-1680)
+│                          │
+├── 🟠 Cadì de Tlemcen     ├── 🟠 Trésorier beylik
+├── 🟣 Palais rue Sidi      ├── 🟣 Maison Dar Benzaghou
+    Ibrahim                      (actuelle rue Medersa)
+├── 🔴 6 enfants           └── 🔴 4 enfants
+└── 📍 ANOM 1S/125              📍 Waqf 1650
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Générations 3-4: Apogée Ottomane (1650-1800)</h3>
+          <p class="period-tag">17e-18e siècle</p>
+
+          <div class="person-card">
+            <div class="person-name">
+              AHMED BEN MOHAMED "AL-KEBIR" (1620-1685)
+            </div>
+            <div class="person-dates">
+              🟡 Traité commercial France-Algérie (1672)
+            </div>
+            <div class="person-role">
+              🟠 Amin et-Toujjar (Président des marchands)
+            </div>
+            <div class="person-details">
+              <p>
+                <strong>Patrimoine :</strong> 450ha terres + 3 maisons +
+                librairie
+              </p>
+              <p>
+                <strong>Épouses :</strong> ZOHRA BENT EL-KHALIL (1625-1695),
+                KHEIRA BENT ABDELKADER (1635-1710), FATIMA BENT MOULEY
+                (1640-1720)
+              </p>
+              <p>
+                <strong>Sources :</strong> Registre cadì 1650-1680, Contrats
+                commerciaux Marseille, Étude "Les Benzaghou" (Benchekroun, 1935)
+              </p>
+            </div>
+          </div>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 AHMED BEN MOHAMED "AL-KEBIR" (1620-1685)         │
+│  🟡 Traité commercial France-Algérie (1672)             │
+│  🟣 Patrimoine : 450ha terres + 3 maisons + librairie   │
+│  🟠 Amin et-Toujjar (Président des marchands)           │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Épouses :                                           │
+│  1. ZOHRA BENT EL-KHALIL (1625-1695) - principale       │
+│  2. KHEIRA BENT ABDELKADER (1635-1710) - secondaire     │
+│  3. FATIMA BENT MOULEY (1640-1720) - alliance marocaine │
+│                                                         │
+│  📍 Sources multiples :                                 │
+│  • 🔴 Registre cadì 1650-1680 (Archives Tlemcen)       │
+│  • 🔴 Contrats commerciaux Marseille (AD Bouches-du-Rh)│
+│  • 🟢 Étude : "Les Benzaghou" (Benchekroun, 1935)      │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────────────┐
+    │                                   │
+    ▼                                   ▼
+🔴 MOHAMED BEN AHMED               🔴 MUSTAPHA BEN AHMED
+(1650-1715)                       (1665-1735)
+│                                  │
+├── 🟠 Ambassadeur à Tunis (1700)  ├── 🟠 Cadì chef (1710-1730)
+├── 🟡 Construction Dar el-Bey     ├── 🟡 Réforme habous
+├── 🟢 Alliance : famille          ├── 🟢 Alliance : famille
+│    Benhassine de Fès                El-Mokrani
+└── 📍 Archives husseinites        └── 📍 Fonds habous Tlemcen
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Générations 5-6: Transition Coloniale (1750-1900)</h3>
+          <p class="period-tag">18e-19e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 ABDELKADER BEN MOHAMED (1740-1810)               │
+│  ⚫ Rôle ambigu pendant la prise d'Oran (1831)          │
+│  🟣 Biens confisqués puis restitués partiellement       │
+│  🟠 Médiateur entre autorités françaises et population  │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Épouse : LALLA KHADIDJA BENT EL-HADJ (1745-1825)    │
+│  🟢 Dot : 15.000 francs or (contrat 1765)               │
+│  📍 Sources :                                           │
+│  • 🔴 Dossier "Famille Benzaghou" - ANOM 10H/200       │
+│  • 🔴 Cadastre 1838 - propriétés urbaines/rurales       │
+│  • 🟢 Mémoires du général Létang (1842)                │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 AHMED BEN ABDELKADER      🔴 FATIMA BENT ABDELKADER
+(1770-1845)                  (1775-1850)
+│                            │
+├── 🟠 Converti au droit     ├── 🟢 Mariée à un officier
+│    français (1835)             français (controversé)
+├── ⚫ Perd 70% des terres    │
+└── 📍 ANOM série F80        └── 📍 Journal "Le Moniteur"
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Générations 7-8: Modernité (1850-1962)</h3>
+          <p class="period-tag">19e-20e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 MOHAMED BEN AHMED (1845-1920)                    │
+│  🟡 Premier avocat algérien du barreau d'Oran (1875)    │
+│  🟣 Recouvre 30% des terres familiales par procès       │
+│  🟠 Conseiller municipal de Tlemcen (1890-1910)         │
+│  ⚪ Mémoire : "Nous étions là avant les Français"       │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Épouse : ZOHRA BENT BRAHIM (1850-1930)              │
+│  🟢 Alliance : famille Bencheneb (universitaires)       │
+│  📍 Sources :                                           │
+│  • 🔴 Diplôme avocat - Archives Ordre des avocats      │
+│  • 🔴 Dossiers de procès - Tribunal Tlemcen            │
+│  • 🟢 "Élites algériennes sous la colonisation"        │
+│    (Kamel Kateb, 2001)                                 │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 ALI BEN MOHAMED           🔴 FATIMA BENT MOHAMED
+(1875-1954)                  (1880-1962)
+│                            │
+├── 🟠 Médecin diplômé       ├── 🟠 Première bachelière
+│    Paris (1905)                famille (1898)
+├── 🟡 Fondateur journal     ├── 🟡 Épouse un leader
+│    "El-Nadjah" (1920)          nationaliste
+└── 📍 Archives Aix          └── 📍 Archives familiales
+                    </pre
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Boukandoura Family Section -->
+    <section id="boukandoura">
+      <div class="container">
+        <h2><i class="fas fa-coins family-icon"></i> Famille Boukandoura</h2>
+        <p class="subtitle">
+          Dynastie marchande de Constantine, Est algérien (1650-1970)
+        </p>
+
+        <div class="family-section">
+          <h3>Contexte Historique</h3>
+          <p class="period-tag">1650-1970</p>
+          <p>
+            <strong>Spécialisation :</strong> Commerce international, banque
+          </p>
+          <p><strong>Réseau :</strong> Méditerranée centrale, Europe du Sud</p>
+          <p><strong>Capital initial :</strong> 50.000 piastres (c. 1680)</p>
+        </div>
+
+        <div class="family-section">
+          <h3>Génération Fondatrice (1650-1730)</h3>
+          <p class="period-tag">17e-18e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 HADJ MOHAMED BOUKANDOURA (c. 1660-1730)          │
+│  🟡 Premier pèlerinage documenté : 1685                 │
+│  🟣 Achat caravansérail Constantine : 1705 (2.000 piastres)│
+│  🟠 Titre honorifique : "El-Khawaja" (le négociant)     │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Épouse : AICHA BENT EL-HADJ (1665-1740)             │
+│  🟢 Fille d'un riche commerçant de la Mecque            │
+│  📍 Sources :                                           │
+│  • 🔴 Registre douane Alger 1685-1730                   │
+│  • 🔴 Testament 1728 - partage entre 7 fils             │
+│  • 🟢 "Marchands algériens" (Temimi, 1979)              │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 ALI BEN HADJ MOHAMED      🔴 OMAR BEN HADJ MOHAMED
+(1690-1765)                  (1695-1770)
+│  🟠 Amin et-Toujjar 1725   │  🟠 Directeur succursale
+│  🟣 Fortune : 1,2M piastres│     Tunis
+│  📍 ANOM 1S/210            │  📍 Archives tunisiennes
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Structures Commerciales - Réseau 1780</h3>
+          <p class="period-tag">18e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+BOUKANDOURA & FILS - RÉSEAU 1780
+├── 📍 **Siège social** : Constantine, rue des Marchands
+│   ├── 🏢 Entrepôts : 5 (cuir, laine, céréales)
+│   ├── 🏦 Comptoir bancaire : change, prêts
+│   └── 📮 Bureau de correspondance : 12 employés
+├── 📍 **Succursales** :
+│   ├── 🇩🇿 Alger : rue Bab Azoun (directeur : cousin)
+│   ├── 🇹🇳 Tunis : médina (directeur : neveu)
+│   ├── 🇲🇦 Fès : quartier des tanneurs
+│   └── 🇫🇷 Marseille : Vieux Port (agent : français)
+└── 📍 **Correspondants** :
+    ├── Livourne : famille juive livournaise
+    ├── Gênes : maison de commerce Doria
+    ├── Gibraltar : négociant anglais
+    └── Alexandrie : marchand syrien
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Générations d'Expansion (1720-1800)</h3>
+          <p class="period-tag">18e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 MOHAMED BEN ALI "LE GRAND" (1725-1795)           │
+│  🟡 Innovation : introduction de la comptabilité        │
+│    en partie double (1760)                              │
+│  🟣 Crise de 1770 : sauvetage économique de Constantine │
+│  🟠 Fondation : école franco-arabe (1775)               │
+│  ⚫ Accusé de collaboration avec pirates barbaresques   │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Journal de bord (1750-1790) - Extrait :             │
+│  "10 mars 1768 : Expédié 500 ballots de laine à        │
+│   Marseille via le navire 'La Provence'. Assuré pour   │
+│   30.000 livres. Risque de tempête."                   │
+│                                                         │
+│  📍 Sources exceptionnelles :                           │
+│  • 🔴 42 volumes de comptabilité (1760-1795)           │
+│  • 🔴 Correspondance commerciale (3.200 lettres)       │
+│  • 🟢 Thèse : "Le négoce constantinois" (L. Valensi)   │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+           ┌──────┴──────┐
+           │             │
+           ▼             ▼
+🔴 AHMED BEN MOHAMED  🔴 FATIMA BENT MOHAMED
+(1750-1815)           (1755-1830)
+│                     │
+├── 🟠 Négociateur    ├── 🟢 Mariée au Bey
+│    traité 1791          de Constantine
+└── 📍 Archives Beylik└── 📍 Chronique locale
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Génération de Transition (1780-1870)</h3>
+          <p class="period-tag">18e-19e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 MUSTAPHA BEN AHMED (1785-1855)                   │
+│  🟡 Adaptation au système colonial : création de        │
+│    "Boukandoura Frères" société en commandite (1838)   │
+│  🟣 Pertes : 60% du capital pendant la conquête (1837)  │
+│  🟠 Stratégie : diversification dans l'agriculture      │
+│  ⚪ Mémoire familiale : "Il a sauvé l'essentiel"        │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Épouses (stratégie d'alliances post-1830) :         │
+│  1. KHEIRA BENT SLIMANE (1790-1860) - famille locale    │
+│  2. MARIE DUPONT (1805-1880) - Française convertie     │
+│     ⚠️ Conversion controversée dans les deux communautés│
+│                                                         │
+│  📍 Sources biculturelles :                            │
+│  • 🔴 Registre de commerce 1838-1855                   │
+│  • 🔴 Actes notariés français et musulmans             │
+│  • 🟢 "Métissage économique" (C. Bensadoun, 1995)      │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+           ┌──────┴──────┐
+           │             │
+           ▼             ▼
+🔴 ALI BEN MUSTAPHA   🔴 JEAN-BAPTISTE BOULKANDOUR
+(1820-1890)           (1825-1900)
+│  🟠 Gère les terres  │  🟠 Avocat à Paris
+│  📍 Cadastre 1860    │  ⚫ Changement de nom
+                      │  📍 Archives Paris
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Analyse Économique - Évolution du Capital (1680-1962)</h3>
+          <p class="period-tag">Analyse sur 3 siècles</p>
+
+          <div class="tree-container">
+            <pre>
+PÉRIODE          CAPITAL (équivalent francs or)  ÉVÉNEMENTS
+1680-1720        ↗ 50.000 → 500.000              Commerce maritime
+1720-1760        ↗ 500.000 → 2.000.000           Monopole des cuirs
+1760-1790        → 2.000.000                     Stagnation - crises
+1790-1830        ↘ 2.000.000 → 800.000           Guerres napoléoniennes
+1830-1850        ↘ 800.000 → 300.000             Conquête française
+1850-1900        ↗ 300.000 → 1.500.000           Adaptation coloniale
+1900-1950        → 1.500.000                     Stabilité relative
+1950-1962        ↘ 1.500.000 → 200.000           Guerre d'indépendance
+                    </pre
+            >
+          </div>
+
+          <div class="tree-container" style="margin-top: 1.5rem">
+            <pre>
+DIVERSIFICATION DES ACTIVITÉS BOUKANDOURA PAR ÉPOQUE :
+├── 🟡 **1680-1830 : Commerce international**
+│   ├── Export : Cuir, laine, cire, blé
+│   ├── Import : Textiles, armes, sucre
+│   └── Services : Change, assurance maritime
+├── 🟢 **1830-1900 : Adaptation coloniale**
+│   ├── Agriculture : Domaines céréaliers
+│   ├── Viticulture : (controversée)
+│   └── Bâtiment : Fournitures aux armées
+└── 🔵 **1900-1962 : Modernisation**
+    ├── Industrie : Minoterie, huilerie
+    ├── Transport : Camions, autobus
+    └── Services : Hôtellerie, cinéma
+                    </pre
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ouled Sidi Cheikh Section -->
+    <section id="sidi-cheikh">
+      <div class="container">
+        <h2><i class="fas fa-users family-icon"></i> Ouled Sidi Cheikh</h2>
+        <p class="subtitle">
+          Confédération Saharienne du Sud-Ouest Algérien (1750-1962)
+        </p>
+
+        <div class="family-section">
+          <h3>Contexte Géopolitique</h3>
+          <p class="period-tag">1750-1962</p>
+          <p><strong>Territoire :</strong> Sud-Ouest algérien (160.000 km²)</p>
+          <p><strong>Structure :</strong> Confédération tribale (24 tribus)</p>
+          <p>
+            <strong>Ressources :</strong> Élevage, palmeraies, sel, commerce
+            transsaharien
+          </p>
+          <p><strong>Idéologie :</strong> Soufisme (confrérie Rahmaniya)</p>
+        </div>
+
+        <div class="family-section">
+          <h3>Cartographie Tribale c. 1850</h3>
+          <p class="period-tag">19e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+TERRITOIRE OULED SIDI CHEIKH c. 1850
+┌─────────────────────────────────────────────────────┐
+│  🔵 **Zone d'influence directe** :                  │
+│  ├── Nord : Aïn Sefra, El Bayadh                    │
+│  ├── Sud : Beni Abbès, Taghit                      │
+│  ├── Est : Laghouat, Ghardaïa                      │
+│  └── Ouest : Figuig (Maroc)                        │
+│                                                    │
+│  🟢 **Itinéraires contrôlés** :                    │
+│  ├── Piste du sel : Taghit → Timimoun              │
+│  ├── Piste de l'or : Soudan → Maroc                │
+│  └── Piste des pèlerins : Afrique → La Mecque      │
+│                                                    │
+│  🔴 **Zaouïas principales** :                      │
+│  ├── Zaouïa mère : El Hamel (siège spirituel)      │
+│  ├── Zaouïa de Chellala                            │
+│  └── 16 autres zaouïas satellites                  │
+└─────────────────────────────────────────────────────┘
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Génération Fondatrice - Sainteté et Pouvoir</h3>
+          <p class="period-tag">18e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     ⚪ SIDI CHEIKH BOUAMAMA (c. 1735-1795)               │
+│  🟡 Fondation de la confrérie (c. 1760)                 │
+│  🟣 Miracle documenté : guérison du bey d'Oran (1772)   │
+│  🟠 Autorité spirituelle reconnue jusqu'au Maroc        │
+│  ⚪ Hagiographie : 12 miracles dans la tradition orale  │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Sources hagiographiques :                           │
+│  • Manuscrit "Chajarat en-Nassab" (arbre généalogique)  │
+│  • Poème "El-Bourda" copie annotée par le saint         │
+│  • 42 lettres de conseil spirituel                      │
+│                                                         │
+│  📍 Localisation des archives :                         │
+│  • Bibliothèque zaouïa El Hamel (partiellement détruite │
+│    en 1847 et 1957)                                     │
+│  • Archives familiales dispersées entre Alger et Paris  │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+⚪ SIDI SLIMANE              ⚪ SIDI MOHAMED
+(1760-1825)                  (1765-1830)
+│  🟠 Successeur spirituel   │  🟠 Chef militaire
+│  📍 Chronique El-Hamel     │  📍 Rapports militaires
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Génération de Résistance (1800-1880)</h3>
+          <p class="period-tag">19e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 SLIMANE BEN SIDI MOHAMED (1795-1860)             │
+│  🟡 Première révolte documentée : 1827-1832             │
+│  🟣 Stratégie : guérilla saharienne + alliances marocaines│
+│  🟠 Titre : "Cheikh el-Arab" (reconnu par 24 tribus)    │
+│  ⚫ Dossier ANOM : "Chef insoumis - à neutraliser"       │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Archives militaires françaises (1827-1860) :        │
+│  • 87 rapports de colonnes militaires                   │
+│  • 42 lettres interceptées                              │
+│  • 3 portraits (dessins militaires)                     │
+│  • Cartes des déplacements (mensuelles 1840-1850)       │
+│                                                         │
+│  ⚠️ Particularité :                                     │
+│  Premier chef algérien à utiliser systématiquement      │
+│  le territoire marocain comme base arrière              │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 MOHAMED BEN SLIMANE       🔴 AICHA BENT SLIMANE
+(1820-1885)                  (1825-1900)
+│  🟠 Chef 1852-1865         │  🟢 Mariée au chef des
+│  📍 ANOM H/230                 Ouled Naïl (alliance)
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Génération Héroïque - Bouamama (1840-1908)</h3>
+          <p class="period-tag">19e-20e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+┌─────────────────────────────────────────────────────────┐
+│     🔴 BOUAMAMA BEN LARBI (1840-1908)                   │
+│  🟡 Grande insurrection : 1881-1883 (27 batailles)      │
+│  🟣 Troupes : 3.000 cavaliers + 5.000 fantassins max    │
+│  🟠 Stratégie innovante : guerre mobile sur 3 fronts    │
+│  ⚫ Dossier ANOM : 54 classeurs (le plus volumineux     │
+│    pour un chef algérien)                               │
+├─────────────────────────────────────────────────────────┤
+│  🔴 Sources exceptionnellement riches :                 │
+│  • Photographies : Mission Flatters (1880), Mission     │
+│    Foureau-Lamy (1898)                                  │
+│  • Témoignages : 12 prisonniers français interrogés     │
+│  • Objets personnels saisis : sabre, fusil, sceau       │
+│  • Poésie de résistance : 42 poèmes recueillis          │
+│                                                         │
+│  📍 Archives dispersées :                               │
+│  • Service historique de la Défense (Vincennes)         │
+│  • Musée de l'Armée (Paris)                             │
+│  • Bibliothèque nationale (Alger)                       │
+│  • Collections privées (famille en Algérie et Maroc)    │
+└─────────────────┬───────────────────────────────────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+🔴 SLIMANE BEN BOUAMAMA     🔴 FATIMA BENT BOUAMAMA
+(1865-1940)                 (1870-1950)
+│  🟠 Chef en exil (Maroc)  │  🟢 Gardienne de la mémoire
+│  📍 Archives chérifiennes │     familiale
+                           │  📍 Témoignages enregistrés
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Démographie Tribale (c. 1850)</h3>
+          <p class="period-tag">19e siècle</p>
+
+          <div class="tree-container">
+            <pre>
+CONFÉDÉRATION OULED SIDI CHEIKH :
+├── 👥 **Population totale** : ~45.000 personnes
+│   ├── Hommes adultes : 12.000
+│   ├── Femmes adultes : 13.000
+│   ├── Enfants : 20.000
+│   └── Esclaves/affranchis : 2.000
+├── 🏇 **Force militaire maximale** :
+│   ├── Cavaliers : 3.000
+│   ├── Fantassins : 5.000
+│   └── Réserve (tribus alliées) : 8.000
+└── 🐪 **Richesse pastorale** :
+    ├── Chameaux : 25.000
+    ├── Moutons/chèvres : 120.000
+    └── Chevaux : 5.000
+                    </pre
+            >
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Impact Historiographique</h3>
+          <p class="period-tag">Études académiques</p>
+
+          <div class="tree-container">
+            <pre>
+ÉTUDES CONSACRÉES AUX OULED SIDI CHEIKH :
+├── 📚 **Thèses universitaires** : 14
+│   ├── France : 8
+│   ├── Algérie : 4
+│   ├── Autres : 2
+│   └── Période : 1890-2020
+├── 🎬 **Productions culturelles** :
+│   ├── Films : 3
+│   ├── Documentaires : 7
+│   ├── Romans : 12
+│   └── Pièces de théâtre : 4
+└── 🏛️ **Lieux de mémoire** :
+    ├── Musée Bouamama (Aïn Sefra)
+    ├── Stèle commémorative (El Bayadh)
+    ├── Rue Bouamama (12 villes algériennes)
+    └── Timbre poste (1982)
+                    </pre
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistiques Section -->
+    <section id="statistiques">
+      <div class="container">
+        <h2>
+          <i class="fas fa-chart-bar family-icon"></i> Statistiques Comparatives
+        </h2>
+        <p class="subtitle">
+          Analyse quantitative des trois familles (1550-1962)
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">487</div>
+            <p>Individus documentés (toutes familles)</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">4,5M</div>
+            <p>Francs or (patrimoine maximal c. 1780)</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">42</div>
+            <p>Diplômés supérieurs (après 1850)</p>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">89</div>
+            <p>Fonctions officielles recensées</p>
+          </div>
+        </div>
+
+        <div class="family-section">
+          <h3>Statistiques Familiales Benzaghou</h3>
+
+          <div class="tree-container">
+            <pre>
+ANALYSE QUANTITATIVE (1550-1962) :
+├── 📈 **Effectifs documentés** : 487 individus
+├── 💰 **Patrimoine maximal** : 4,5M francs or (c. 1780)
+├── 🎓 **Diplômés supérieurs** : 42 (après 1850)
+├── 💼 **Fonctions officielles** : 89
+│   ├── Cadis : 23
+│   ├── Ambassadeurs : 7
+│   ├── Conseillers : 19
+│   └── Fonctionnaires : 40
+└── 🤝 **Alliances stratégiques** :
+    ├── Familles marocaines : 12
+    ├── Familles turques : 8
+    ├── Familles françaises : 6 (après 1830)
+    └── Familles algériennes : 145
+                    </pre
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galerie" class="gallery-section">
+      <div class="container">
+        <div class="gallery-intro">
+          <h2>
+            <i class="fas fa-images family-icon"></i> Galerie d'Archives
+            Visuelles
+          </h2>
+          <p class="gallery-subtitle">
+            Cartes, manuscrits, portraits et scènes historiques intégrés depuis
+            le dossier <span class="highlight">photos</span>.
+          </p>
+
+          <div class="gallery-controls">
+            <div class="gallery-search">
+              <i class="fas fa-search"></i>
+              <input
+                id="gallerySearch"
+                type="search"
+                placeholder="Rechercher dans la galerie..."
+              />
+            </div>
+
+            <div class="gallery-filters" id="galleryFilters">
+              <button type="button" class="filter-btn active" data-filter="all">
+                Tout
+              </button>
+              <button type="button" class="filter-btn" data-filter="cartes">
+                Cartes
+              </button>
+              <button type="button" class="filter-btn" data-filter="manuscrits">
+                Manuscrits
+              </button>
+              <button type="button" class="filter-btn" data-filter="portraits">
+                Portraits
+              </button>
+              <button type="button" class="filter-btn" data-filter="scenes">
+                Scènes
+              </button>
+              <button
+                type="button"
+                class="filter-btn"
+                data-filter="illustrations"
+              >
+                Illustrations
+              </button>
+            </div>
+          </div>
+
+          <div class="gallery-stats">
+            <span id="galleryCount" class="gallery-count"></span>
+          </div>
+        </div>
+
+        <div class="photo-grid" id="photoGrid">
+          <!-- Les 20 emplacements pour photos seront ajoutés ici par JavaScript -->
+        </div>
+
+        <div class="gallery-footer">
+          <div class="gallery-hint">
+            <div class="hint-item">
+              <i class="fas fa-mouse-pointer"></i> Cliquez pour apercevoir
+            </div>
+            <div class="hint-item">
+              <i class="fas fa-upload"></i> Remplacer / ajouter
+            </div>
+            <div class="hint-item">
+              <i class="fas fa-file-image"></i> JPG/PNG/PDF • 10MB
+            </div>
+          </div>
+          <p>
+            <span class="highlight">Instructions:</span> Cliquez sur les cases
+            vides pour ajouter vos photos et manuscrits.
+          </p>
+          <p>
+            Formats acceptés: JPG, PNG, PDF. Taille maximale: 10MB par fichier.
+          </p>
+          <button
+            id="addAllBtn"
+            class="gallery-upload-all"
+            type="button"
+            style="
+              background-color: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 1rem 2rem;
+              border-radius: 5px;
+              margin-top: 1.5rem;
+              font-weight: bold;
+              cursor: pointer;
+              font-family: 'Cinzel', serif;
+            "
+          >
+            <i class="fas fa-upload"></i> Télécharger Toutes les Images
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <i class="fas fa-sitemap"></i> Généalogie Algérienne
+          </div>
+          <p>Présentation généalogique des familles historiques d'Algérie</p>
+          <p>Benzaghou • Boukandoura • Ouled Sidi Cheikh</p>
+          <div class="copyright">
+            <p>
+              © 2023 - Recherches généalogiques approfondies par Kamel Sarouti
+            </p>
+            <p>
+              Sources documentaires: Archives Zianides, ANOM (Aix-en-Provence),
+              Archives du Gouvernement Général de l'Algérie, Registres
+              Cadastraux, Manuscrits de la Bibliothèque Nationale d'Alger,
+              Archives Familiales, Études Historiques Spécialisées
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Fermer"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div
+        class="lightbox-content"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Aperçu du document"
+      >
+        <div class="lightbox-media">
+          <img id="lightboxImg" alt="" />
+        </div>
+        <div class="lightbox-side">
+          <h3 id="lightboxTitle"></h3>
+          <p id="lightboxDesc"></p>
+          <div class="photo-meta" id="lightboxMeta"></div>
+          <div class="lightbox-actions">
+            <a
+              class="lightbox-download"
+              id="lightboxDownload"
+              href="#"
+              download
+            >
+              <i class="fas fa-download"></i> Télécharger
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Generate photo placeholders
+      const photoGrid = document.getElementById("photoGrid");
+
+      // Gallery UI elements
+      const gallerySearch = document.getElementById("gallerySearch");
+      const galleryFilters = document.getElementById("galleryFilters");
+      const galleryCount = document.getElementById("galleryCount");
+
+      // Lightbox elements
+      const lightbox = document.getElementById("lightbox");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxDesc = document.getElementById("lightboxDesc");
+      const lightboxMeta = document.getElementById("lightboxMeta");
+      const lightboxDownload = document.getElementById("lightboxDownload");
+
+      let activeFilter = "all";
+      let currentLightboxIndex = null;
+
+      // Photos disponibles dans `photos/` (hors background)
+      const integratedDocuments = [
+        {
+          src: "photos/documentouledsidichikh.png",
+          title: "Couverture — Les Ouled Sidi Cheikh (1891)",
+          description:
+            "Page de titre d'un ouvrage consacré aux Ouled Sidi Cheikh (édition 1891).",
+          category: "manuscrits",
+          badge: "Manuscrit",
+        },
+        {
+          src: "photos/description.png",
+          title: "Extrait — Beni Hilal",
+          description:
+            "Extrait de texte mentionnant les filiations tribales et l'origine (Beni Hilal).",
+          category: "manuscrits",
+          badge: "Texte",
+        },
+        {
+          src: "photos/map1.png",
+          title: "Carte administrative — Territoires du Sud",
+          description:
+            "Carte de l'Algérie mettant en évidence les limites administratives et les territoires du Sud.",
+          category: "cartes",
+          badge: "Carte",
+        },
+        {
+          src: "photos/map2.png",
+          title: "Carte historique — Algérie (Afrique Française)",
+          description:
+            "Carte ancienne présentant régions, villes principales et zones sahariennes.",
+          category: "cartes",
+          badge: "Carte",
+        },
+        {
+          src: "photos/nomade.png",
+          title: "Campement de nomades",
+          description:
+            "Photographie d'archive représentant un campement et la vie quotidienne.",
+          category: "scenes",
+          badge: "Scène",
+        },
+        {
+          src: "photos/photopeuple.png",
+          title: "Scènes et types — Ouled-Naïls",
+          description:
+            "Carte postale/photographie d'époque illustrant des scènes de vie.",
+          category: "scenes",
+          badge: "Archive",
+        },
+        {
+          src: "photos/soldatsgensgroupe.png",
+          title: "Rassemblement (archive)",
+          description:
+            "Photographie/Carte postale ancienne montrant un rassemblement.",
+          category: "scenes",
+          badge: "Archive",
+        },
+        {
+          src: "photos/soldatmembre.png",
+          title: "Portrait de groupe (notables)",
+          description:
+            "Portrait de groupe avec légendes d'époque visibles sur l'image.",
+          category: "portraits",
+          badge: "Portrait",
+        },
+        {
+          src: "photos/hommeavectenuetraditionnelle.png",
+          title: "Portrait — Tenue traditionnelle",
+          description:
+            "Portrait d'époque en habit cérémoniel (photographie ancienne).",
+          category: "portraits",
+          badge: "Portrait",
+        },
+        {
+          src: "photos/photogenssoldats.png",
+          title: "Portrait (archive) — Fin XIXe siècle",
+          description:
+            "Photographie d'époque faisant partie des archives visuelles du dossier.",
+          category: "portraits",
+          badge: "Archive",
+        },
+        {
+          src: "photos/image5.png",
+          title: "Illustration historique — Image 5",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image6.png",
+          title: "Illustration historique — Image 6",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image8.png",
+          title: "Illustration historique — Image 8",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image9.png",
+          title: "Illustration historique — Image 9",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image10.png",
+          title: "Illustration historique — Image 10",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image11.png",
+          title: "Illustration historique — Image 11",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image12.png",
+          title: "Illustration historique — Image 12",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image14.png",
+          title: "Illustration historique — Image 14",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image15.png",
+          title: "Illustration historique — Image 15",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image16.png",
+          title: "Illustration historique — Image 16",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image17.png",
+          title: "Illustration historique — Image 17",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+        {
+          src: "photos/image18.png",
+          title: "Illustration historique — Image 18",
+          description: "Illustration intégrée au dossier (peinture/gravure).",
+          category: "illustrations",
+          badge: "Illustration",
+        },
+      ];
+
+      const minSlots = 24;
+      const photoCount = Math.max(minSlots, integratedDocuments.length);
+
+      function normalizeText(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+      }
+
+      function filenameFromSrc(src) {
+        if (!src || src.startsWith("data:")) return "";
+        const parts = src.split("/");
+        return parts[parts.length - 1] || "";
+      }
+
+      function getCardModel(index) {
+        return (
+          integratedDocuments[index - 1] || {
+            src: "",
+            title: `Emplacement ${index}`,
+            description: "Cliquez pour ajouter une image (JPG/PNG) ou un PDF.",
+            category: "ajouts",
+            badge: "Ajouter",
+          }
+        );
+      }
+
+      function setPlaceholderEmpty(placeholder) {
+        const media = placeholder.querySelector(".photo-media");
+        if (media) {
+          media.innerHTML = `
+                    <div class="photo-empty-icon"><i class="fas fa-plus-circle"></i></div>
+                    <div class="photo-empty-title">Ajouter un document</div>
+                    <div class="photo-empty-sub">Image (JPG/PNG) ou PDF</div>
+                `;
+        }
+
+        placeholder.classList.remove("has-image");
+        placeholder.dataset.src = "";
+        placeholder.dataset.type = "";
+
+        const previewBtn = placeholder.querySelector('[data-action="preview"]');
+        if (previewBtn) previewBtn.disabled = true;
+      }
+
+      function setPlaceholderImage(placeholder, src, index) {
+        const media = placeholder.querySelector(".photo-media");
+        if (!media) return;
+
+        media.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Document ${index}`;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", () => setPlaceholderEmpty(placeholder));
+        media.appendChild(img);
+
+        placeholder.classList.add("has-image");
+        placeholder.dataset.src = src;
+        placeholder.dataset.type = "image";
+
+        const previewBtn = placeholder.querySelector('[data-action="preview"]');
+        if (previewBtn) previewBtn.disabled = false;
+      }
+
+      function setPlaceholderPdf(placeholder, objectUrl, fileName) {
+        const media = placeholder.querySelector(".photo-media");
+        if (media) {
+          media.innerHTML = `
+                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: #8a2b2b;"></i>
+                    <div style="font-size: 0.9rem; margin-top: 10px;">${fileName}</div>
+                `;
+        }
+
+        placeholder.classList.add("has-image");
+        placeholder.dataset.src = objectUrl;
+        placeholder.dataset.type = "pdf";
+
+        const previewBtn = placeholder.querySelector('[data-action="preview"]');
+        if (previewBtn) previewBtn.disabled = false;
+      }
+
+      function updateGalleryCount() {
+        if (!galleryCount) return;
+        const total = document.querySelectorAll("#photoGrid .photo-item").length;
+        const visible = document.querySelectorAll(
+          "#photoGrid .photo-item:not(.hidden)"
+        ).length;
+        galleryCount.textContent = `${visible} / ${total} affichés`;
+      }
+
+      function applyGalleryFilters() {
+        const query = normalizeText(gallerySearch?.value);
+        const items = document.querySelectorAll("#photoGrid .photo-item");
+
+        items.forEach((item) => {
+          const category = item.dataset.category || "all";
+          const searchable = item.dataset.search || "";
+          const matchesFilter = activeFilter === "all" || category === activeFilter;
+          const matchesQuery = !query || searchable.includes(query);
+          item.classList.toggle("hidden", !(matchesFilter && matchesQuery));
+        });
+
+        updateGalleryCount();
+      }
+
+      function openLightboxForIndex(index) {
+        if (!lightbox) return;
+        const placeholder = document.querySelector(
+          `#photoGrid .photo-placeholder[data-index="${index}"]`
+        );
+        if (!placeholder) return;
+
+        const src = placeholder.dataset.src;
+        if (!src) return;
+
+        const type = placeholder.dataset.type;
+        if (type === "pdf") {
+          window.open(src, "_blank", "noopener");
+          return;
+        }
+
+        const item = placeholder.closest(".photo-item");
+        const title =
+          item?.querySelector(".photo-title")?.textContent?.trim() ||
+          `Document ${index}`;
+        const description = item?.querySelector(".photo-desc")?.textContent || "";
+        const badge = placeholder.querySelector(".photo-badge")?.textContent || "";
+        const fileName = filenameFromSrc(src);
+
+        if (lightboxImg) {
+          lightboxImg.src = src;
+          lightboxImg.alt = title;
+        }
+        if (lightboxTitle) lightboxTitle.textContent = title;
+        if (lightboxDesc) lightboxDesc.textContent = description;
+
+        if (lightboxMeta) {
+          const metaParts = [];
+          if (badge) metaParts.push(badge.trim());
+          if (fileName) metaParts.push(fileName);
+          lightboxMeta.textContent = metaParts.join(" • ");
+        }
+
+        if (lightboxDownload) {
+          const downloadName = fileName || `document-${index}.png`;
+          lightboxDownload.href = src;
+          lightboxDownload.download = downloadName;
+        }
+
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        currentLightboxIndex = Number(index);
+      }
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        if (lightboxImg) lightboxImg.src = "";
+        currentLightboxIndex = null;
+      }
+
+      function getVisibleIndexesWithMedia() {
+        return Array.from(
+          document.querySelectorAll(
+            "#photoGrid .photo-item:not(.hidden) .photo-placeholder"
+          )
+        )
+          .map((el) => Number(el.dataset.index))
+          .filter((n) => Number.isFinite(n))
+          .filter((n) => {
+            const el = document.querySelector(
+              `#photoGrid .photo-placeholder[data-index="${n}"]`
+            );
+            return el && el.dataset.src;
+          });
+      }
+
+      function navigateLightbox(delta) {
+        const indexes = getVisibleIndexesWithMedia();
+        if (!indexes.length || currentLightboxIndex === null) return;
+        const position = indexes.indexOf(currentLightboxIndex);
+        if (position === -1) return;
+        const nextIndex =
+          indexes[(position + delta + indexes.length) % indexes.length];
+        openLightboxForIndex(nextIndex);
+      }
+
+      // Build gallery cards
+      for (let i = 1; i <= photoCount; i++) {
+        const model = getCardModel(i);
+
+        const photoItem = document.createElement("div");
+        photoItem.className = "photo-item";
+        photoItem.dataset.category = model.category || "all";
+        photoItem.dataset.search = normalizeText(
+          `${model.title} ${model.description} ${model.badge} ${filenameFromSrc(
+            model.src
+          )}`
+        );
+
+        photoItem.innerHTML = `
+                <div class="photo-placeholder" data-index="${i}" tabindex="0">
+                  <div class="photo-media">
+                    <div class="photo-empty-icon"><i class="fas fa-plus-circle"></i></div>
+                    <div class="photo-empty-title">Ajouter un document</div>
+                    <div class="photo-empty-sub">Image (JPG/PNG) ou PDF</div>
+                  </div>
+                  <div class="photo-actions">
+                    <button type="button" class="photo-action" data-action="preview" aria-label="Aperçu">
+                      <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button type="button" class="photo-action" data-action="replace" aria-label="Remplacer">
+                      <i class="fas fa-upload"></i>
+                    </button>
+                  </div>
+                  <span class="photo-badge">${model.badge || ""}</span>
+                </div>
+                <div class="photo-info">
+                  <h4 class="photo-title">${model.title}</h4>
+                  <p class="photo-desc">${model.description}</p>
+                  <div class="photo-meta">
+                    <span class="photo-meta-item"><i class="fas fa-tag"></i>${model.badge || "—"}</span>
+                    <span class="photo-meta-item"><i class="fas fa-file"></i>${filenameFromSrc(model.src) || "—"}</span>
+                  </div>
+                </div>
+            `;
+
+        const placeholder = photoItem.querySelector(".photo-placeholder");
+        const photoInfo = photoItem.querySelector(".photo-info");
+        const previewBtn = photoItem.querySelector('[data-action="preview"]');
+        const replaceBtn = photoItem.querySelector('[data-action="replace"]');
+
+        if (model.src) {
+          setPlaceholderImage(placeholder, model.src, i);
+        } else {
+          setPlaceholderEmpty(placeholder);
+        }
+
+        placeholder.addEventListener("click", () => {
+          if (placeholder.dataset.src) {
+            openLightboxForIndex(i);
+          } else {
+            uploadPhoto(i, placeholder, photoInfo, photoItem);
+          }
+        });
+
+        placeholder.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            placeholder.click();
+          }
+        });
+
+        previewBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openLightboxForIndex(i);
+        });
+
+        replaceBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          uploadPhoto(i, placeholder, photoInfo, photoItem);
+        });
+
+        photoGrid.appendChild(photoItem);
+      }
+
+      function uploadPhoto(index, placeholder, photoInfo, photoItem) {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*,.pdf";
+
+        input.onchange = function (e) {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+
+          if (file.size > 10 * 1024 * 1024) {
+            alert("Fichier trop volumineux. Taille maximale: 10MB");
+            return;
+          }
+
+          const description =
+            integratedDocuments[index - 1]?.description ||
+            "Document importé par l'utilisateur.";
+          const isPdf = file.type.includes("pdf");
+          const badge = isPdf ? "PDF" : "Importé";
+
+          const titleEl = photoInfo.querySelector(".photo-title");
+          const descEl = photoInfo.querySelector(".photo-desc");
+          const metaEl = photoInfo.querySelector(".photo-meta");
+          const badgeEl = placeholder.querySelector(".photo-badge");
+
+          if (titleEl) titleEl.textContent = file.name;
+          if (descEl) descEl.textContent = description;
+          if (badgeEl) badgeEl.textContent = badge;
+
+          if (metaEl) {
+            const sizeMb = (file.size / 1024 / 1024).toFixed(2);
+            metaEl.innerHTML = `
+                    <span class="photo-meta-item"><i class="fas fa-tag"></i>${badge}</span>
+                    <span class="photo-meta-item"><i class="fas fa-file"></i>${file.name}</span>
+                    <span class="photo-meta-item"><i class="fas fa-weight-hanging"></i>${sizeMb} MB</span>
+                `;
+          }
+
+          if (photoItem) {
+            photoItem.dataset.search = normalizeText(
+              `${file.name} ${description} ${badge}`
+            );
+          }
+
+          if (isPdf) {
+            const url = URL.createObjectURL(file);
+            setPlaceholderPdf(placeholder, url, file.name);
+            applyGalleryFilters();
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const result = event.target.result;
+            setPlaceholderImage(placeholder, result, index);
+            applyGalleryFilters();
+          };
+          reader.readAsDataURL(file);
+        };
+
+        input.click();
+      }
+
+      // Filters
+      if (galleryFilters) {
+        galleryFilters.addEventListener("click", (e) => {
+          const btn = e.target.closest(".filter-btn");
+          if (!btn) return;
+          activeFilter = btn.dataset.filter || "all";
+          galleryFilters.querySelectorAll(".filter-btn").forEach((b) => {
+            b.classList.toggle("active", b === btn);
+          });
+          applyGalleryFilters();
+        });
+      }
+
+      if (gallerySearch) {
+        gallerySearch.addEventListener("input", () => applyGalleryFilters());
+      }
+
+      // Lightbox events
+      if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+
+      if (lightbox) {
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox || !lightbox.classList.contains("open")) return;
+
+        if (e.key === "Escape") {
+          closeLightbox();
+        } else if (e.key === "ArrowRight") {
+          navigateLightbox(1);
+        } else if (e.key === "ArrowLeft") {
+          navigateLightbox(-1);
+        }
+      });
+
+      applyGalleryFilters();
+
+      /* Legacy gallery code (disabled):
+      // Local images (renamed to image1.png ... image34.png)
+      const integratedImages = Array.from(
+        { length: 34 },
+        (_, i) => `photos/image${i + 1}.png`
+      );
+
+      const photoCount = Math.max(20, integratedImages.length);
+
+      // Sample descriptions for each photo
+      const sampleDescriptions = [
+        "Manuscrit généalogique Benzaghou (17e siècle)",
+        "Contrat de mariage Fatima Bent El-Mostapha (1580)",
+        "Dar Benzaghou à Tlemcen (photo 1900)",
+        "Traité commercial France-Algérie (1672)",
+        "Diplôme d'avocat Mohamed Ben Ahmed (1875)",
+        "Caravansérail Boukandoura à Constantine",
+        "Registre de comptabilité Boukandoura (1768)",
+        "Journal de bord Mohamed Ben Ali 'Le Grand'",
+        "Acte de société 'Boukandoura Frères' (1838)",
+        "Domaine viticole Boukandoura (photo 1910)",
+        "Sidi Cheikh Bouamama (portrait traditionnel)",
+        "Zaouïa El Hamel (siège spirituel)",
+        "Carte des déplacements de Slimane Ben Sidi Mohamed",
+        "Bouamama Ben Larbi (photographie 1880)",
+        "Sabre de Bouamama (Musée de l'Armée)",
+        "Poésie de résistance des Ouled Sidi Cheikh",
+        "Acte de propriété terrienne (19e siècle)",
+        "Correspondance diplomatique (18e siècle)",
+        "Arbre généalogique manuscrit (Chajarat en-Nassab)",
+        "Photo de famille Benzaghou (années 1920)",
+      ];
+
+      function getDescriptionForIndex(index) {
+        return sampleDescriptions[index - 1] || `Document historique ${index}`;
+      }
+
+      function setIntegratedImage(placeholder, src, index) {
+        placeholder.innerHTML = "";
+        placeholder.style.background = "transparent";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = `Document ${index}`;
+        img.loading = "lazy";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        placeholder.appendChild(img);
+      }
+
+      for (let i = 1; i <= photoCount; i++) {
+        const description = getDescriptionForIndex(i);
+        const photoItem = document.createElement("div");
+        photoItem.className = "photo-item";
+        photoItem.innerHTML = `
+                <div class="photo-placeholder" data-index="${i}">
+                    <i class="fas fa-plus-circle"></i>
+                    <div style="font-size: 1rem; margin-top: 10px;">Document ${i}</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px; color: #888;">${description}</div>
+                </div>
+                <div class="photo-info">
+                    <p><strong>Document ${i}</strong></p>
+                    <p>${description}</p>
+                    <p>Cliquez pour télécharger</p>
+                </div>
+            `;
+
+        // Add click event to upload photo
+        const placeholder = photoItem.querySelector(".photo-placeholder");
+        const photoInfo = photoItem.querySelector(".photo-info");
+
+        if (integratedImages[i - 1]) {
+          setIntegratedImage(placeholder, integratedImages[i - 1], i);
+        }
+
+        placeholder.addEventListener("click", function () {
+          const index = this.getAttribute("data-index");
+          uploadPhoto(index, placeholder, photoInfo);
+        });
+
+        photoGrid.appendChild(photoItem);
+      }
+
+      function uploadPhoto(index, placeholder, photoInfo) {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*,.pdf";
+
+        input.onchange = function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            if (file.size > 10 * 1024 * 1024) {
+              alert("Fichier trop volumineux. Taille maximale: 10MB");
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              placeholder.innerHTML = "";
+              placeholder.style.background = "transparent";
+
+              if (file.type.includes("image")) {
+                const img = document.createElement("img");
+                img.src = event.target.result;
+                img.style.width = "100%";
+                img.style.height = "100%";
+                img.style.objectFit = "cover";
+                placeholder.appendChild(img);
+              } else if (file.type.includes("pdf")) {
+                placeholder.innerHTML = `
+                                <i class="fas fa-file-pdf" style="font-size: 3rem; color: #8a2b2b;"></i>
+                                <div style="font-size: 0.9rem; margin-top: 10px;">${file.name}</div>
+                            `;
+              }
+
+              // Update photo info
+              photoInfo.innerHTML = `
+                            <p><strong>${file.name}</strong></p>
+                            <p>${getDescriptionForIndex(Number(index))}</p>
+                            <p>${(file.size / 1024 / 1024).toFixed(
+                              2
+                            )} MB • ${new Date().toLocaleDateString()}</p>
+                        `;
+
+              // Add a success indicator
+              const successMsg = document.createElement("div");
+              successMsg.innerHTML = `<i class="fas fa-check-circle" style="color: green;"></i> Document ajouté`;
+              successMsg.style.fontSize = "0.8rem";
+              successMsg.style.marginTop = "5px";
+              photoInfo.appendChild(successMsg);
+            };
+            reader.readAsDataURL(file);
+          }
+        };
+
+        input.click();
+      }
+
+      */
+
+      // Bulk upload button
+      document
+        .getElementById("addAllBtn")
+        .addEventListener("click", function () {
+          alert(
+            "Pour ajouter ou remplacer des documents, utilisez le bouton \"Remplacer\" sur chaque carte. L'import en lot nécessite un serveur."
+          );
+        });
+
+      // Back to top functionality
+      const backToTopButton = document.querySelector(".back-to-top");
+
+      window.addEventListener("scroll", function () {
+        if (window.pageYOffset > 300) {
+          backToTopButton.style.display = "flex";
+        } else {
+          backToTopButton.style.display = "none";
+        }
+      });
+
+      backToTopButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll("nav a").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+
+            // Update active nav link
+            document.querySelectorAll("nav a").forEach((link) => {
+              link.classList.remove("active");
+            });
+            this.classList.add("active");
+          }
+        });
+      });
+
+      // Highlight current section in navigation
+      window.addEventListener("scroll", function () {
+        let current = "";
+        const sections = document.querySelectorAll("section");
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+
+          if (pageYOffset >= sectionTop - 150) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        document.querySelectorAll("nav a").forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Initialize first nav link as active
+      document
+        .querySelector('nav a[href="#introduction"]')
+        .classList.add("active");
+
+      // Add keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowUp" && window.pageYOffset > 100) {
+          window.scrollBy({ top: -100, behavior: "smooth" });
+        } else if (e.key === "ArrowDown") {
+          window.scrollBy({ top: 100, behavior: "smooth" });
+        }
+      });
+
+      // Print functionality
+      const printButton = document.createElement("button");
+      printButton.innerHTML = '<i class="fas fa-print"></i> Imprimer';
+      printButton.style.position = "fixed";
+      printButton.style.bottom = "30px";
+      printButton.style.left = "30px";
+      printButton.style.backgroundColor = "var(--primary-color)";
+      printButton.style.color = "white";
+      printButton.style.border = "none";
+      printButton.style.padding = "0.8rem 1.5rem";
+      printButton.style.borderRadius = "5px";
+      printButton.style.cursor = "pointer";
+      printButton.style.zIndex = "999";
+      printButton.style.fontFamily = "'Cinzel', serif";
+      printButton.style.fontWeight = "bold";
+      printButton.addEventListener("click", function () {
+        window.print();
+      });
+      document.body.appendChild(printButton);
+    </script>
+  </body>
+</html>
